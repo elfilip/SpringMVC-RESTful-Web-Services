@@ -94,6 +94,16 @@ public class UserController {
         return returnValue;
     }
 
+    @PutMapping(path = "/reset/{id}")
+    public ResponseEntity<Void> resetPassword(@PathVariable String id) {
+        boolean isReset = userService.resetPassword(id, "rohlik123");
+        if (isReset) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @ApiImplicitParams({
             @ApiImplicitParam(name ="authorization",
                     value ="${userController.authorizationHeader.description}",
