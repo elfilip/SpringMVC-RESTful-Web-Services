@@ -155,6 +155,24 @@ In the UserController.java [POST, GET, UPDATE, DELETE] functions are available.<
     }
 
 ```
+
+#### DuplicateUser Function
+
+```
+    @PostMapping(path = "/duplicate/{id}", consumes = {MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE})
+            
+    //This function will duplicate a user based on the provided user id
+    
+    public UserRest duplicateUser(@PathVariable String id) {
+        UserRest returnValue = new UserRest();
+        UserDTO duplicatedUserDTO = userService.duplicateUser(id);
+        BeanUtils.copyProperties(duplicatedUserDTO, returnValue);
+        return returnValue;
+    }
+```
 #### To Run the application you need to install maven and run the given command below:
 
 Run the command where you have downloaded the repository.

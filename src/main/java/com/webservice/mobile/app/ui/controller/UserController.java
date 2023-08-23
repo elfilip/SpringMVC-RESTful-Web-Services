@@ -118,5 +118,16 @@ public class UserController {
         return returnValue;
     }
 
+    @PostMapping(path = "/duplicate/{id}", consumes = {MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE})
+    public UserRest duplicateUser(@PathVariable String id) {
+        UserRest returnValue = new UserRest();
+        UserDTO duplicatedUserDTO = userService.duplicateUser(id);
+        BeanUtils.copyProperties(duplicatedUserDTO, returnValue);
+        return returnValue;
+    }
+
 
 }
