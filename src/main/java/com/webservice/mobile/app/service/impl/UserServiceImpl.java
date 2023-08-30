@@ -135,4 +135,17 @@ public class UserServiceImpl implements UserService {
 
         return new User(userEntity.getEmail(),userEntity.getEncryptedPassword(),new ArrayList<>());
     }
+
+    @Override
+    public boolean resetPassword(String id, String password) {
+        UserEntity userEntity = userRepository.findByUserId(id);
+        if (userEntity == null) {
+            return false;
+        }
+
+        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(password));
+        userRepository.save(userEntity);
+
+        return true;
+    }
 }
